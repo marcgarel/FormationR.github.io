@@ -8,6 +8,9 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - text: "R for beginners"
+        href: rforbeginer.qmd
+        
 
 format:
   html:

@@ -1,5 +1,14 @@
 {
   "about.qmd": {
     "about.html": "1cdda8b3"
+  },
+  "rforbeginer.qmd": {
+    "rforbeginer.html": "d264396f"
+  },
+  "practical/rforbeginer.qmd": {
+    "rforbeginer.html": "8d1801a2"
+  },
+  "index.qmd": {
+    "index.html": "d4af02ab"
   }
 }
