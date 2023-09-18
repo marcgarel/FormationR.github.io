@@ -40,8 +40,10 @@ getwd()
 setwd("/path/to/my/fancy/project/")
 ```
 
+:::{.callout-note}
 In Rstudio, we can change the working directory by navigating in folder in **File** panel
 and clicking on menu **More**
+:::
 
 If you are using a Rproject, you don't need to change your working directory.
 
