@@ -2,6 +2,13 @@
 title: "FormationR"
 ---
 
-This is a Quarto website.
+Welcome on the R training provided by OMICS platform and MIO 
+Cours and training will be teach by Marc Garel, Pauline Le Coq and Fabrice Armougom 
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Schedule 
+
+* DAY1
+* DAY2
+* DAY3
+* DAY4
+
