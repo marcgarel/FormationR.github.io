@@ -2,13 +2,31 @@
 title: "FormationR"
 ---
 
-Welcome on the R training provided by OMICS platform and MIO 
-Cours and training will be teach by Marc Garel, Pauline Le Coq and Fabrice Armougom 
+Welcome on the R training provided by [OMICS](https://www.mio.osupytheas.fr/fr/plateformes-de-recherche/ptf-omics) platform and [MIO](https://www.mio.osupytheas.fr/fr)
 
-Schedule 
 
-* DAY1
-* DAY2
-* DAY3
-* DAY4
+## Training proposed by 
+
+Marc Garel, Pauline Le Coq and Fabrice Armougom
+
+
+## Schedule 
+
+* **DAY1** : 
+  * Rstudio environment and R language course 
+  * Practical 1: R basics: Vectors, Tables, dataframe, manipulations, descriptive statistics, Rmarkdown
+  
+* **DAY2**
+  * End of Practical 1
+  * Graphical representation of biological data & management of parameters type/colour/shape/...
+  
+* **DAY3**
+  * Practical 2 Graphical representation of results
+  
+* **DAY4**
+  * Lectures and practical work: Inferential statistics (Anova, Kruskall, Wilcoxon, regression, correlation, r, R2, adjusted p-value, etc.)
+  
+* **Day 5**
+  * Global test - Validation of prior learning
+
 

@@ -45,6 +45,7 @@ In Rstudio, we can change the working directory by navigating in folder in **Fil
 and clicking on menu **More**
 :::
 
+
 If you are using a Rproject, you don't need to change your working directory.
 
 **How can I find documentation about function?**
