@@ -408,9 +408,34 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><a href="https://www.cnrs.fr//"><img src="./img/logo-cnrs.jpg" alt="CNRS" height="40"></a> <a href="https://www.ird.fr/"><img src="./img/Logo_IRD_2016_BLOC_FR_COUL.png" alt="IRD" height="40"></a> <a href="https://www.mio.osupytheas.fr/"><img src="./img/logo_fr_mio_rvb_small.jpg" alt="MIO" height="40"></a> <a href="https://www.univ-amu.fr/"><img src="./img/logo-amu.svg" alt="AMU" height="40"></a> <a href="https://osupytheas.fr/"><img src="./img/OSU-IP_RVB_H100_ECRAN.jpg" alt="OSU" height="30"></a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 
