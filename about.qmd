@@ -2,12 +2,15 @@
 title: "About"
 ---
 
-Welcome on the R training provided by OMICS platform and MIO 
-Cours and training will be teach by Marc Garel, Pauline Le Coq and Fabrice Armougom 
+## Plateform OMICS
 
-Schedule 
 
-* DAY1
-* DAY2
-* DAY3
+## Organisation committee and intervenants
 
+[Laurie Casalot](laurie.casalot@mio.osupytheas.fr)
+
+[Fabrice Armougom](fabrice.armougom@mio.osupytheas.fr)
+
+[Marc Garel](marc.garel@mio.osupytheas.fr)
+
+[Pauline Le Coq](pauline.locoq@mio.osupytheas.fr)

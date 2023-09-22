@@ -5,11 +5,6 @@ title: "FormationR"
 Welcome on the R training provided by [OMICS](https://www.mio.osupytheas.fr/fr/plateformes-de-recherche/ptf-omics) platform and [MIO](https://www.mio.osupytheas.fr/fr)
 
 
-## Training proposed by 
-
-Marc Garel, Pauline Le Coq and Fabrice Armougom
-
-
 ## Schedule 
 
 * **DAY1** : 

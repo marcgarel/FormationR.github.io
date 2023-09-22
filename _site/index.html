@@ -116,8 +116,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#training-proposed-by" id="toc-training-proposed-by" class="nav-link active" data-scroll-target="#training-proposed-by">Training proposed by</a></li>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
+  <li><a href="#schedule" id="toc-schedule" class="nav-link active" data-scroll-target="#schedule">Schedule</a></li>
   </ul>
 </nav>
     </div>
@@ -142,10 +141,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>Welcome on the R training provided by <a href="https://www.mio.osupytheas.fr/fr/plateformes-de-recherche/ptf-omics">OMICS</a> platform and <a href="https://www.mio.osupytheas.fr/fr">MIO</a></p>
-<section id="training-proposed-by" class="level2">
-<h2 class="anchored" data-anchor-id="training-proposed-by">Training proposed by</h2>
-<p>Marc Garel, Pauline Le Coq and Fabrice Armougom</p>
-</section>
 <section id="schedule" class="level2">
 <h2 class="anchored" data-anchor-id="schedule">Schedule</h2>
 <ul>
@@ -409,7 +404,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/marcgarel\.github\.io\/FormationR\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
