@@ -516,7 +516,7 @@ The function is similar to `read.table()`
 - **na** : give a symbole for missing data, by convention is NA
 
 ```{r eval=FALSE}
-write.table(ds, "ds.txt", sep = "\t", dec = ".")
+write.table(ds, "./data/ds.txt", sep = "\t", dec = ".")
 ```
 
 To keep our working directory tidy, we now delete `ds.txt`
@@ -528,65 +528,3 @@ Exo 4
 
 1. In the dataset Iris select Sepal Width, Sepal length and  Species,to create a new data frame name "subset_iris"
 2. Save this new data frame as text file 
-
-## How to represent your data
-
-**ggplot2** is a powerfull packages to make a very smart graph "ready to use" for publication. **gg** means grammar and graph, a concept which describe a graph using grammar. This package belong to tidyverse according to `dplyr`. According to the ggplot2 concept, a graph can be divided into different basic parts:**Plot = data + Aesthetics + Geometry**
-
-- *data* : data frame
-- *aesthetics* : allows to indicate the x and y variables. It can also be used to control the color, size and shape of the points, etc...
-- *geometry* : corresponds to the type of graph (histogram, box plot, line plot, .....)
-
-```{r}
-library(ggplot2)
-# scatter plot 
-ggplot(data = iris, aes(Sepal.Length, Sepal.Width))+ #  what I want to represent 
-  geom_point() # how I represent it 
-```
-
-```{r}
-# We can calorize and give a shape by month 
-# scatter plot 
-ggplot(data = iris, aes(Sepal.Length, Sepal.Width))+ 
-  geom_point(aes(color = Species, shape = Species)) # shape is the same thing with classical plot on R
-```
-```{r}
-# You can change manually color with la fonction scale_color_manual()
-ggplot(data = iris, aes(Sepal.Length, Sepal.Width))+  
- geom_point(aes(color = Species, shape = Species))  +
-  scale_color_manual(values = c("#00AFBB", "#E7B800", "#FC4E07"))
-```
-```{r}
-#Boxplot 
-ggplot(data = iris, aes(Species, Sepal.Length))+ #  what I want to represent 
-  geom_boxplot(aes(color=Species, fill=Species), alpha=0.4)+# how I represent it. Here I changed geometry using boxplot.
-  labs(x="Species", y="Sepal.Length (mm)")+
-  theme_minimal()
-```
-
-**Save your plot**
-
-Using the function `pdf()`
-
-Firstly you have to store plot inside and object
-
-```{r}
-#Boxplot 
-g1<-ggplot(data = iris, aes(Species, Sepal.Length))+ #  what I want to represent 
-  geom_boxplot(aes(color=Species, fill=Species), alpha=0.4)+# how I represent it. Here I changed geometry using boxplot.
-  labs(x="Species", y="Sepal.Length (mm)")+
-  theme_minimal()
-```
-
-
-```{r}
-pdf("yourfile.pdf")
-g1
-dev.off()
-```
-
-or `ggplot2::ggsave()`
-
-```{r}
-ggsave("yourfile2.pdf", g1)
-```
