@@ -492,13 +492,12 @@ The main parameter are :
 - **sep** : the field separator character. Values on each line of the file are separated by this character. If sep = "" (the default for read.table) the separator is ‘white space’, that is one or more spaces, tabs, newlines or carriage returns.
 - **dec** : the character used in the file for decimal points.
 
-```{r eval=FALSE}
-ds <- read.table(here::here("data",
-                            "rforbeginers",
-                            "exemple_read.txt"),
+```{r}
+ds <- read.table("./data/exemple_read.txt",
                  header = TRUE,
                  sep = ";",
                  dec = ",")
+head(ds)
 ```
 
 
