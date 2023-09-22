@@ -7,10 +7,10 @@ title: "About"
 
 ## Organisation committee and intervenants
 
-[Laurie Casalot](laurie.casalot@mio.osupytheas.fr)
+[Laurie Casalot](mailto:laurie.casalot@mio.osupytheas.fr)
 
-[Fabrice Armougom](fabrice.armougom@mio.osupytheas.fr)
+[Fabrice Armougom](mailto:fabrice.armougom@mio.osupytheas.fr)
 
-[Marc Garel](marc.garel@mio.osupytheas.fr)
+[Marc Garel](mailto:marc.garel@mio.osupytheas.fr)
 
-[Pauline Le Coq](pauline.locoq@mio.osupytheas.fr)
+[Pauline Le Coq](mailto:pauline.locoq@mio.osupytheas.fr)
