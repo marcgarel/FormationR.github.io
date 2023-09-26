@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Marc Garel, MIO">
+<meta name="author" content="Marc Garel &amp; Fabrice Armougom">
 
-<title>FormationR - Part 0: R for beginner</title>
+<title>FormationR - Introduction to R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,6 +128,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./rforbeginer.html" rel="" target="" aria-current="page">
  <span class="menu-text">R for beginners</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Graph.html" rel="" target="">
+ <span class="menu-text">Graph</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -173,7 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#usual-functions-for-data-frame" id="toc-usual-functions-for-data-frame" class="nav-link" data-scroll-target="#usual-functions-for-data-frame">Usual functions for data frame</a></li>
   <li><a href="#use-dplyr-to-select-filter-a-data-frame" id="toc-use-dplyr-to-select-filter-a-data-frame" class="nav-link" data-scroll-target="#use-dplyr-to-select-filter-a-data-frame">Use dplyr to select, filter a data frame</a></li>
   </ul></li>
-  <li><a href="#how-to-represent-your-data" id="toc-how-to-represent-your-data" class="nav-link" data-scroll-target="#how-to-represent-your-data">How to represent your data</a></li>
+  <li><a href="#how-to-import-external-data-frame-issue-from-.txt-or-.csv" id="toc-how-to-import-external-data-frame-issue-from-.txt-or-.csv" class="nav-link" data-scroll-target="#how-to-import-external-data-frame-issue-from-.txt-or-.csv">How to import external data frame issue from .txt or .csv</a></li>
   </ul>
 </nav>
     </div>
@@ -182,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Part 0: R for beginner</h1>
+<h1 class="title">Introduction to R</h1>
 </div>
 
 
@@ -192,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Marc Garel, MIO </p>
+             <p>Marc Garel &amp; Fabrice Armougom </p>
           </div>
   </div>
     
@@ -305,7 +309,19 @@ Note
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="dv">2</span><span class="sc">+</span><span class="dv">3</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="st">"madame"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong><span style="color: red;"> What happens when you execute this cell?</span></strong></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>What happens when you execute this cell?</strong></p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1071,8 +1087,20 @@ row_4    NA 78</code></pre>
 </section>
 <section id="bonus-to-pipe-many-function-serval-function-together" class="level5">
 <h5 class="anchored" data-anchor-id="bonus-to-pipe-many-function-serval-function-together">Bonus : to pipe many function serval function together</h5>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>The pipe <span style="color: steelblue;"> <strong>&gt;|</strong> </span>, or <span style="color: steelblue;"><strong>%&gt;%</strong></span>, is one of the useful elements of the tidyverse. It allows to structure sequences of operations by minimizing the creation of intermediate objects and by facilitating the addition of a step anywhere in this sequence.</p>
 <p>The useful command to manage data frame : 1) select() to select vector or variable from a data frame ; 2) filter() is used to subset a data frame, retaining all rows that satisfy your conditions ; mutate() adds new variables and preserves existing ones.</p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
@@ -1441,7 +1469,19 @@ row_4    NA 78</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In this last example Sepal.Length_norm is calculated using the mean of the Sepal.Length for each species using group_by()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong><span style="color: red;"> These commands are non-persistent, no changes are made on the original iris data frame.</span></strong> <strong><span style="color: red;">If you want to store it, you must assign your changes to a object</span></strong></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>These commands are non-persistent, no changes are made on the original iris data frame. If you want to store it, you must assign your changes to a object. How do we do ?</strong></p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>iris_modif<span class="ot">&lt;-</span>iris <span class="sc">%&gt;%</span></span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sepal.Length, Species) <span class="sc">%&gt;%</span></span>
@@ -1449,8 +1489,10 @@ row_4    NA 78</code></pre>
 <span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Sepal.Length_norm =</span> Sepal.Length <span class="sc">/</span> <span class="fu">mean</span>(Sepal.Length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="how-to-import-external-data-frame-issue-from-.txt-or-.csv" class="level4">
-<h4 class="anchored" data-anchor-id="how-to-import-external-data-frame-issue-from-.txt-or-.csv">How to import external data frame issue from .txt or .csv</h4>
+</section>
+</section>
+<section id="how-to-import-external-data-frame-issue-from-.txt-or-.csv" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-import-external-data-frame-issue-from-.txt-or-.csv">How to import external data frame issue from .txt or .csv</h2>
 <p>To import data set, the function <code>read.table()</code> or <code>read.csv()</code> are commonly used.</p>
 <p><code>read.table(file, header = FALSE, sep = "", dec = ".", ...)</code></p>
 <p>The main parameter are :</p>
@@ -1477,7 +1519,6 @@ row_4    NA 78</code></pre>
 </div>
 </div>
 <p><span style="color: steelblue;">Why I use the parameter <code>header=TRUE</code> ?</span></p>
-</section>
 <section id="to-export-data-set-as-.txt-to-read-in-excel" class="level4">
 <h4 class="anchored" data-anchor-id="to-export-data-set-as-.txt-to-read-in-excel">To export data set as .txt to read in excel</h4>
 <p>The function is similar to <code>read.table()</code></p>
@@ -1490,7 +1531,7 @@ row_4    NA 78</code></pre>
 <li><strong>na</strong> : give a symbole for missing data, by convention is NA</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(ds, <span class="st">"ds.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">dec =</span> <span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(ds, <span class="st">"./data/ds.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">dec =</span> <span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To keep our working directory tidy, we now delete <code>ds.txt</code></p>
 <div class="cell">
@@ -1508,82 +1549,9 @@ file or directory'</code></pre>
 <li>In the dataset Iris select Sepal Width, Sepal length and Species,to create a new data frame name “subset_iris”</li>
 <li>Save this new data frame as text file</li>
 </ol>
-</section>
-</section>
-</section>
-<section id="how-to-represent-your-data" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-represent-your-data">How to represent your data</h2>
-<p><strong>ggplot2</strong> is a powerfull packages to make a very smart graph “ready to use” for publication. <strong>gg</strong> means grammar and graph, a concept which describe a graph using grammar. This package belong to tidyverse according to <code>dplyr</code>. According to the ggplot2 concept, a graph can be divided into different basic parts:<strong>Plot = data + Aesthetics + Geometry</strong></p>
-<ul>
-<li><em>data</em> : data frame</li>
-<li><em>aesthetics</em> : allows to indicate the x and y variables. It can also be used to control the color, size and shape of the points, etc…</li>
-<li><em>geometry</em> : corresponds to the type of graph (histogram, box plot, line plot, …..)</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="co"># scatter plot </span></span>
-<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="fu">aes</span>(Sepal.Length, Sepal.Width))<span class="sc">+</span> <span class="co">#  what I want to represent </span></span>
-<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="co"># how I represent it </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="rforbeginer_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can calorize and give a shape by month </span></span>
-<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="co"># scatter plot </span></span>
-<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="fu">aes</span>(Sepal.Length, Sepal.Width))<span class="sc">+</span> </span>
-<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Species, <span class="at">shape =</span> Species)) <span class="co"># shape is the same thing with classical plot on R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="rforbeginer_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can change manually color with la fonction scale_color_manual()</span></span>
-<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="fu">aes</span>(Sepal.Length, Sepal.Width))<span class="sc">+</span>  </span>
-<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Species, <span class="at">shape =</span> Species))  <span class="sc">+</span></span>
-<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="rforbeginer_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Boxplot </span></span>
-<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="fu">aes</span>(Species, Sepal.Length))<span class="sc">+</span> <span class="co">#  what I want to represent </span></span>
-<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">color=</span>Species, <span class="at">fill=</span>Species), <span class="at">alpha=</span><span class="fl">0.4</span>)<span class="sc">+</span><span class="co"># how I represent it. Here I changed geometry using boxplot.</span></span>
-<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Species"</span>, <span class="at">y=</span><span class="st">"Sepal.Length (mm)"</span>)<span class="sc">+</span></span>
-<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="rforbeginer_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p><strong>Save your plot</strong></p>
-<p>Using the function <code>pdf()</code></p>
-<p>Firstly you have to store plot inside and object</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Boxplot </span></span>
-<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>g1<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="fu">aes</span>(Species, Sepal.Length))<span class="sc">+</span> <span class="co">#  what I want to represent </span></span>
-<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">color=</span>Species, <span class="at">fill=</span>Species), <span class="at">alpha=</span><span class="fl">0.4</span>)<span class="sc">+</span><span class="co"># how I represent it. Here I changed geometry using boxplot.</span></span>
-<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Species"</span>, <span class="at">y=</span><span class="st">"Sepal.Length (mm)"</span>)<span class="sc">+</span></span>
-<span id="cb124-5"><a href="#cb124-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">"yourfile.pdf"</span>)</span>
-<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a>g1</span>
-<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>quartz_off_screen 
-                2 </code></pre>
-</div>
-</div>
-<p>or <code>ggplot2::ggsave()</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"yourfile2.pdf"</span>, g1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Saving 7 x 5 in image</code></pre>
-</div>
-</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

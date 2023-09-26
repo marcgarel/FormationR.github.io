@@ -10,6 +10,8 @@ website:
       - about.qmd
       - text: "R for beginners"
         href: rforbeginer.qmd
+      - text: "Graph"
+        href: Graph.qmd
     right:
       - icon: github
         href: https://github.com/marcgarel/FormationR.github.io

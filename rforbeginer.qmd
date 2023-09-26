@@ -1,12 +1,11 @@
 ---
-title: "Part 0: R for beginner"
+title: "Introduction to R"
 format: html
 ---
 
 ---
-title: "Part 0: R for beginner"
 output: html_document
-author: "Marc Garel, MIO"
+author: "Marc Garel & Fabrice Armougom"
 editor_options: 
   chunk_output_type: inline
 ---
@@ -123,7 +122,9 @@ a=2+3
 b="madame"
 ```
 
-**<span style="color: red;"> What happens when you execute this cell?</span>**
+:::{.callout-warning}
+**What happens when you execute this cell?**
+:::
 
 ```{r}
 a
@@ -437,9 +438,11 @@ myline=c(22, 38, 120) # I build a vector containing the line that I want
 dplyr::slice(iris,myline)
 ```
 ##### Bonus : to pipe many function serval function together
+:::{.callout-note}
 The pipe <span style="color: steelblue;"> **>|** </span>, or <span style="color: steelblue;">**%>%**</span>, is one of the useful elements of the tidyverse. It allows to structure sequences of operations by minimizing the creation of intermediate objects and by facilitating the addition of a step anywhere in this sequence.
 
 The useful command to manage data frame : 1) select() to select vector or variable from a data frame ; 2) filter() is used to subset a data frame, retaining all rows that satisfy your conditions ; mutate() adds new variables and preserves existing ones.
+:::
 
 ```{r}
 library(dplyr)
@@ -468,9 +471,9 @@ iris %>%
 
 # In this last example Sepal.Length_norm is calculated using the mean of the Sepal.Length for each species using group_by()
 ```
-
-**<span style="color: red;"> These commands are non-persistent, no changes are made on the original iris data frame.</span>**
-**<span style="color: red;">If you want to store it, you must assign your changes to a object</span>**
+:::{.callout-important}
+**These commands are non-persistent, no changes are made on the original iris data frame. If you want to store it, you must assign your changes to a object. How do we do ?** 
+:::
 
 ```{r}
 iris_modif<-iris %>%
@@ -479,7 +482,7 @@ iris_modif<-iris %>%
   mutate(Sepal.Length_norm = Sepal.Length / mean(Sepal.Length, na.rm = TRUE))
 ```
 
-#### How to import external data frame issue from .txt or .csv
+## How to import external data frame issue from .txt or .csv
 
 To import data set, the function `read.table()` or `read.csv()` are commonly used.
 
