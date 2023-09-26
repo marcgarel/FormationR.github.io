@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Marc Garel, MIO">
+<meta name="author" content="Marc Garel &amp; Fabrice Armougom">
 
-<title>FormationR - Part 0: R for beginner</title>
+<title>FormationR - Introduction to R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,6 +128,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./rforbeginer.html" rel="" target="" aria-current="page">
  <span class="menu-text">R for beginners</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Graph.html" rel="" target="">
+ <span class="menu-text">Graph</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -173,6 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#usual-functions-for-data-frame" id="toc-usual-functions-for-data-frame" class="nav-link" data-scroll-target="#usual-functions-for-data-frame">Usual functions for data frame</a></li>
   <li><a href="#use-dplyr-to-select-filter-a-data-frame" id="toc-use-dplyr-to-select-filter-a-data-frame" class="nav-link" data-scroll-target="#use-dplyr-to-select-filter-a-data-frame">Use dplyr to select, filter a data frame</a></li>
   </ul></li>
+  <li><a href="#how-to-import-external-data-frame-issue-from-.txt-or-.csv" id="toc-how-to-import-external-data-frame-issue-from-.txt-or-.csv" class="nav-link" data-scroll-target="#how-to-import-external-data-frame-issue-from-.txt-or-.csv">How to import external data frame issue from .txt or .csv</a></li>
   </ul>
 </nav>
     </div>
@@ -181,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Part 0: R for beginner</h1>
+<h1 class="title">Introduction to R</h1>
 </div>
 
 
@@ -191,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Marc Garel, MIO </p>
+             <p>Marc Garel &amp; Fabrice Armougom </p>
           </div>
   </div>
     
@@ -304,7 +309,19 @@ Note
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="dv">2</span><span class="sc">+</span><span class="dv">3</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="st">"madame"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong><span style="color: red;"> What happens when you execute this cell?</span></strong></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>What happens when you execute this cell?</strong></p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1070,8 +1087,20 @@ row_4    NA 78</code></pre>
 </section>
 <section id="bonus-to-pipe-many-function-serval-function-together" class="level5">
 <h5 class="anchored" data-anchor-id="bonus-to-pipe-many-function-serval-function-together">Bonus : to pipe many function serval function together</h5>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>The pipe <span style="color: steelblue;"> <strong>&gt;|</strong> </span>, or <span style="color: steelblue;"><strong>%&gt;%</strong></span>, is one of the useful elements of the tidyverse. It allows to structure sequences of operations by minimizing the creation of intermediate objects and by facilitating the addition of a step anywhere in this sequence.</p>
 <p>The useful command to manage data frame : 1) select() to select vector or variable from a data frame ; 2) filter() is used to subset a data frame, retaining all rows that satisfy your conditions ; mutate() adds new variables and preserves existing ones.</p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
@@ -1440,7 +1469,19 @@ row_4    NA 78</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In this last example Sepal.Length_norm is calculated using the mean of the Sepal.Length for each species using group_by()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong><span style="color: red;"> These commands are non-persistent, no changes are made on the original iris data frame.</span></strong> <strong><span style="color: red;">If you want to store it, you must assign your changes to a object</span></strong></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>These commands are non-persistent, no changes are made on the original iris data frame. If you want to store it, you must assign your changes to a object. How do we do ?</strong></p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>iris_modif<span class="ot">&lt;-</span>iris <span class="sc">%&gt;%</span></span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sepal.Length, Species) <span class="sc">%&gt;%</span></span>
@@ -1448,8 +1489,10 @@ row_4    NA 78</code></pre>
 <span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Sepal.Length_norm =</span> Sepal.Length <span class="sc">/</span> <span class="fu">mean</span>(Sepal.Length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="how-to-import-external-data-frame-issue-from-.txt-or-.csv" class="level4">
-<h4 class="anchored" data-anchor-id="how-to-import-external-data-frame-issue-from-.txt-or-.csv">How to import external data frame issue from .txt or .csv</h4>
+</section>
+</section>
+<section id="how-to-import-external-data-frame-issue-from-.txt-or-.csv" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-import-external-data-frame-issue-from-.txt-or-.csv">How to import external data frame issue from .txt or .csv</h2>
 <p>To import data set, the function <code>read.table()</code> or <code>read.csv()</code> are commonly used.</p>
 <p><code>read.table(file, header = FALSE, sep = "", dec = ".", ...)</code></p>
 <p>The main parameter are :</p>
@@ -1476,7 +1519,6 @@ row_4    NA 78</code></pre>
 </div>
 </div>
 <p><span style="color: steelblue;">Why I use the parameter <code>header=TRUE</code> ?</span></p>
-</section>
 <section id="to-export-data-set-as-.txt-to-read-in-excel" class="level4">
 <h4 class="anchored" data-anchor-id="to-export-data-set-as-.txt-to-read-in-excel">To export data set as .txt to read in excel</h4>
 <p>The function is similar to <code>read.table()</code></p>
@@ -1509,7 +1551,6 @@ file or directory'</code></pre>
 </ol>
 
 
-</section>
 </section>
 </section>
 
