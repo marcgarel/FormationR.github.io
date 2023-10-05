@@ -1,0 +1,644 @@
+---
+title: "Statistic"
+editor: visual
+---
+
+---
+title: "Statistics"
+output:
+  html_notebook:
+    theme: united
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '4'
+authors: Armougom/Garel
+editor_options: 
+  chunk_output_type: inline
+---
+
+## **<span style="color: steelblue;">Load libraries & functions </span>**
+```{r}
+#| output: false
+#libraries
+library(ggplot2)
+library(base)
+library(psych)
+library(dplyr)
+library(stats)
+library(FSA)
+library(ggpubr)
+library(corrplot)
+library(ggpmisc)
+library(graphics)
+library(broom)
+library(dplyr)
+library(tidyr)
+```
+
+```{r}
+#Function indice_normality
+indices_normality <- function(rich, nrow, ncol) {
+
+  ### p-value < 0.05 means data failed normality test
+
+  par(mfrow = c(nrow, ncol))
+
+  for (i in names(rich)) {
+    shap <- shapiro.test(rich[, i])
+    qqnorm(rich[, i], main = i, sub = shap$p.value)
+    qqline(rich[, i])
+  }
+
+  par(mfrow = c(1, 1))
+}
+############
+#Function multiple panel with linear regression & r values
+regression_line = function(x,y, ...){
+    points(x,y,...)
+    linear_regression = lm(y~x)
+    linear_regression_line = abline(linear_regression, col="red")
+}
+###########
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...) {
+  usr <- par("usr")
+  on.exit(par(usr))
+  par(usr = c(0, 1, 0, 1))
+  r <- abs(cor(x, y, use = "complete.obs"))
+  txt <- format(c(r, 0.123456789), digits = digits)[1]
+  txt <- paste(prefix, txt, sep = "")
+  if (missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+  text(0.5, 0.5, txt, cex =  cex.cor * (1 + r) / 2)
+}
+```
+
+
+## **<span style="color: steelblue;">I- Manipulate a data table</span>** 
+
+- ### **<span style="color: steelblue;">a/ Read a table containing data</span>**
+```{r}
+alldata = read.table(file ="./data/data_explore.txt",
+                      check.names = TRUE,
+                      header = TRUE, 
+                      sep = "\t",
+                      row.names = 1)
+```
+
+```{r}
+#see
+alldata
+```
+
+1- **<span style="color: red;">Can you display only the column  NO3 of the table?</span>**<br>
+
+2- **<span style="color: red;">Can you display the row names of the table? (means U1H, U2H etc)<br> </span>** 
+
+3- **<span style="color: red;">Can you select and display any 3 columns of the table? </span>**<br>
+
+- ### **<span style="color: steelblue;">b/ Select a subset from data table </span>**<br>
+
+```{r}
+#Keep only data that correspond to "EU" in the Geo column
+subgroupEU = subset(alldata, Geo=="EU")
+#See 
+subgroupEU
+```  
+
+```{r}
+#Keep only data that correspond to group A & B in the group column
+subgroupAB = subset(alldata, groupe=="A" | groupe=="B")
+#See
+subgroupAB
+```  
+
+- ### **<span style="color: steelblue;">c/ How to Add a new variable after loading table </span>**
+**<span style="color: steelblue;">You forgot to add a variable to your table & you have already loaded your table in R session...how to manage this? </span>**<br>
+```{r}
+# FIRST create a dataframe with a vector with  values of your new variable
+mydataframe = data.frame(MYNEWVAR = c("sediment", "mer", "sediment",
+                                       "trap", "mer", "mer",
+                                       "trap", "trap", "trap",
+                                       "sediment", "mer", "mer",
+                                       "mer", "trap", "trap",
+                                       "mer", "mer"))
+
+#Add rownames=samples names
+row.names(mydataframe) = c("U1H", "U2H", "U5F",
+                            "U6F", "U3H", "U7F",
+                            "U4H", "U8F", "E2H",
+                            "E3H", "E5F", "E1H",
+                            "E7F", "E6F", "E4H",
+                            "E9F", "E8F")
+
+# See & notice that order of sample names is not the same as in mesdata
+mydataframe
+```
+
+- #### **<span style="color: steelblue;">Merge the two dataframes!</span>**
+```{r}
+#Option "by=" the way that you want to merge... here looking for same row.names between the two dataframe
+# in mydataframe and mesdata
+alldata = merge(alldata,mydataframe, by="row.names")
+
+#check that it works
+alldata
+```
+
+
+## **<span style="color: steelblue;"> II- Descriptive statistics</span>**
+<span style="color: steelblue;">**Investigates each variable separately. Distribution of individual variables, mean, dispersion**</span>
+
+- ### **<span style="color: steelblue;">a/ Get stats info for all variables</span>**
+```{r }
+descriptstats = describe(alldata)
+#see
+descriptstats
+```
+
+- ### **<span style="color: steelblue;">b/ Get stats info by groups </span>**
+```{r }
+descriptstats_groups = describeBy(alldata, alldata$Geo, skew=FALSE,ranges=FALSE)
+#see
+descriptstats_groups
+```
+
+
+- ### **<span style="color: steelblue;">c/ Distribution plot </span>**
+
+```{r}
+#Distribution of NO2 for all data  
+ggplot(data=alldata, aes(x=NO2)) +
+geom_density(adjust=1.5, alpha=.4,show.legend=TRUE, aes(fill="red"))
+```
+
+
+```{r}
+#Distribution of NO2 separated by groups
+ggplot(data=alldata, aes(x=NO2, group=Geo, fill=Geo)) +
+geom_density(adjust=1.5, alpha=.4) 
+```
+
+  
+## **<span style="color: steelblue;">III- Inferential Statistics & Tests</span>**
+_____________________________________________________________________<br>
+
+<span style="color: steelblue;">**Normality test**: Check the Normal or not normal distribution of your data to choose the right statistical test!<br><br>
+       - **Shapiro test**: H0 Null Hypothesis: follows Normal distribution!<br>
+         Means if p<0.05 -> reject the H0 (so does not follow a normal distribution)<br><br></span>
+<span style="color: steelblue;">
+      - **Q-Qplots**: Compare your distribution with a theoretical normal distribution<br>
+        If your data follow a normal distribution, you're expecting a linear relationship   
+        theoritical vs. experimental<br>
+        Function `indices_normality()` plots the results<br></span><br>
+_____________________________________________________________________<br>
+
+
+- ### **<span style="color: steelblue;">a/ Select indices to test & run normality check : select function</span>**
+```{r }
+myselection = select(alldata, observed,NRI, evenness)
+#See
+myselection
+```
+
+- ### **<span style="color: steelblue;">b/ Run Normality test: QQ-plot +Shapiro </span>**
+```{r fig.height=15}
+                
+indices_normality(myselection, nrow =3, ncol = 2)
+```
+4- **<span style="color: red;">What are your conclusions?</span>**
+
+5- **<span style="color: red;">PLease can you run a new  normality test Using the parameters NO2,NO3,NH4,PO4 from the alldata object</span>**
+
+
+- ### **<span style="color: steelblue;">c/ The ANOVA test</span>**
+#### **<span style="color: steelblue;">ANOVA is parametric (MUST follows normal distribution) AND run at least with 3 groups or more on ONE variable </span>** <br>
+_____________________________________<br>
+The procedure is : <br>
+- Check Normality <br>
+- Check homogeneity of variance <br>
+- Apply ANOVA test (global test) <br>
+- Apply Post-hoc Test (pairwise group test) <br>
+_____________________________________ <br>
+
+- #### **<span style="color: steelblue;">Select number of groups </span>**
+```{r}
+# How many groups used? See the column "groupe" of alldata (4 groups A,B,C,D):
+factor(alldata$groupe)
+```
+
+```{r}
+# Check homogeneity of variance between groups
+# (this is to avoid bias in ANOVA result & keep the power of the test)
+# H0= equality of variances in the different populations
+bartlett.test(NH4 ~ groupe, alldata)
+```
+
+6- **<span style="color: red;">Conclusion?</span>**<br>
+7- **<span style="color: red;"> Why I can apply ANOVA on NH4 data?</span>**<br>
+
+NB: Alternative to Bartlett : Levene test (package car), less sensitive to normality deviation
+<br>
+<br>
+
+- #### **<span style="color: steelblue;">Apply ANOVA global test</span>**
+**<span style="color: steelblue;">IMPORTANT: Global Test: Anova tell you if that some of the group means are different, but you don't know which pairs of groups are different!</span>**
+
+```{r}
+#Global test
+aov_NH4 = aov(NH4 ~ groupe, alldata)
+summary(aov_NH4)
+```
+
+
+- #### **<span style="color: steelblue;">Apply Post-hoc test</span>**
+**<span style="color: steelblue;">IMPORTANT Anova told you that there is a significant difference between some groups... but Which pairs of groups are different? -> Post-hoc test answers this: Tukey multiple pairwise-comparisons</span>**
+
+```{r}
+#Pairwise-comparisons
+signif_pairgroups = TukeyHSD(aov_NH4, method = "bh")
+signif_pairgroups
+```
+
+- ##### **<span style="color: steelblue;">Representation of tukey results</span>**
+
+```{r}
+plot(TukeyHSD(aov_NH4, conf.level=.95), las = 2)
+```
+
+
+- #### **<span style="color: steelblue;">Tibble table: Reformate the output statistical test for use it with graphics </span>**
+
+```{r}
+convert_format_Tukey = broom::tidy(signif_pairgroups)
+convert_format_Tukey
+```
+
+- ##### **<span style="color: steelblue;"> split the column "contrast" into group1 et group2 (need for applying graph with p-values) </span>**
+
+```{r}
+convert_format_Tukey = separate(convert_format_Tukey,contrast, c('group1', 'group2'),sep = "-")
+convert_format_Tukey
+```
+
+- ##### **<span style="color: steelblue;"> Add a useful column</span>**
+
+```{r}
+convert_format_Tukey$p.adj.signif = c("ns","ns","ns","ns","*","ns")
+convert_format_Tukey
+```
+
+- ##### **<span style="color: steelblue;"> Add another useful column</span>**
+
+```{r}
+#Build column "custom.label" with condition
+convert_format_Tukey$custom.label = ifelse(convert_format_Tukey$adj.p.value <= 0.05, convert_format_Tukey$adj.p.value,"ns")# replace convert_format_Tukey1 par convert_format_Tukey
+convert_format_Tukey
+```
+
+- #### **<span style="color: steelblue;">build Boxplot with p-value </span>**
+
+```{r}
+#boxplot
+mygraph=ggplot(alldata, aes(x = groupe, y = NH4)) +
+geom_boxplot(aes(color = groupe, fill = groupe))
+mygraph
+```
+
+- ##### **<span style="color: steelblue;"> Geom_bracket() : Add p-values on graph </span>**
+
+```{r}
+mygraph + 
+geom_bracket(
+aes(xmin = group1, xmax = group2, label = round(adj.p.value,2)),
+data=convert_format_Tukey, y.position = 1.25,step.increase = 0.1,
+tip.length = 0.01, color="blue")
+```
+- ##### **<span style="color: steelblue;"> Geom_bracket() : Add significance on graph </span>**
+
+```{r}
+mygraph + 
+geom_bracket(
+aes(xmin = group1, xmax = group2, label = p.adj.signif),
+data=convert_format_Tukey, y.position = 1.25,step.increase = 0.1,
+tip.length = 0.01, color="blue")
+```
+
+- ##### **<span style="color: steelblue;"> Geom_bracket() :Specify One or multiple brackets manually </span>**
+
+```{r}
+mygraph + 
+geom_bracket(
+xmin = c("B","A"), xmax = c("D","C"), label = c("*","ns"),
+y.position = 1.5,step.increase = 0.1,
+tip.length = 0.01, color="blue")
+```
+
+
+8- **<span style="color: red;">Conclusion about the statistical tests for NH4??</span>**<br>
+9- **<span style="color: red;">Now, do it for another Chemical parameter that follows normality...(Remember that you have check normality for other parameters see question -5)</span>**
+<br>
+<br>
+
+- ### **<span style="color: steelblue;">d/ Kruskal-Wallis</span>**
+
+:::{.callout-warning}
+**<span style="color: steelblue;">IMPORTANT:  IS non-parametric (for data not following normal distribution) & run at least on THREE or more groups for ONE variable</span>**
+:::
+________________________________________________________<br>
+Procedure is : <br>
+- Apply Kruskal GLobal test <br>
+- Apply Post-hoc Test (pairwise group test, here Dunn) <br>
+________________________________________________________<br>
+<br>
+
+- #### **<span style="color: steelblue;">Apply Kruskal-Wallis global test</span>**
+```{r}
+kruskal.test(NO3 ~ groupe, data = alldata)
+```
+10- **<span style="color: red;">Why I'm using NO3?</span>**<br><br>
+
+- #### **<span style="color: steelblue;">Apply Post hoc test: Dunn test (pairwise group test)</span>**
+```{r}
+signifgroup = dunnTest(NO3 ~ groupe,
+                           data = alldata,
+                           method = "bh")
+#See
+signifgroup
+```
+
+11- **<span style="color: red;">Conclusion??</span>**<br>
+12- **<span style="color: red;">Do you think that it was necessary to make the Post-hoc test? why?</span>**<br>
+13-  **<span style="color: red;">Add a new categorical variable (=not numerical, exple the groupe column) in the table that allows forming 3 groups </span>**<br>
+14- **<span style="color: red;">Use NRI numerical variable and run Kruskal test with your new categorical variable, post-hoc test & boxblot representation</span>**
+<br><br>
+
+- ### **<span style="color: steelblue;">e/ T-test</span>**
+
+:::{.callout-warning}
+**<span style="color: steelblue;">IMPORTANT: Test is parametric= follow normal distribution,homogeneity of variance & run on 2 groups (ONE variable)</span>**
+:::
+
+- #### **<span style="color: steelblue;">Select the groups</span>**
+```{r}
+#Geo column
+factor(alldata$Geo)
+```
+
+- #### **<span style="color: steelblue;">Check homogeneity of variance</span>**
+```{r}
+bartlett.test(PO4 ~ Geo, alldata)
+```
+
+15- **<span style="color: red;">Can I run t-test according to homogeneity of variance result?Why?</span>**<br>
+
+```{r}
+#run t-test
+observed_ttest = t.test(PO4 ~ Geo, data = alldata)
+#see result
+observed_ttest
+```
+16- **<span style="color: red;">Conclusion?</span>**<br>
+
+
+- ### **<span style="color: steelblue;">f/ Wilcoxon rank-sum test </span>**
+
+:::{.callout-warning}
+**<span style="color: steelblue;">IMPORTANT: Is non-parametric (not follow normal distrib) & runs on 2 Groups and ONE variable</span>**
+:::
+
+```{r}
+pairwise_test = compare_means(NO3 ~ Geo,
+                                       alldata,
+                                       method = "wilcox.test")
+#See
+pairwise_test
+```
+
+17- **<span style="color: red;">Why the choice of NO3? Conclusion?</span>**<br>
+
+- #### **<span style="color: steelblue;">Boxplot representation with p-value using stat_pvalue_manual </span>**<br>
+```{r}
+#Boxplot as previously seen
+graph_shan = ggplot(alldata, aes(x = Geo, y = NO3)) + 
+  geom_boxplot(alpha=0.6,
+               fill = c("#00AFBB", "#E7B800"),
+               color = c("#00AFBB", "#E7B800")) +
+  geom_jitter(aes(colour = groupe),
+              position = position_jitter(0.02) ,
+              cex=2.2) +
+  stat_summary(fun = mean, geom = "point",
+               shape = 17, size = 3,
+               color = "white")
+#see
+graph_shan
+```
+
+- #### **<span style="color: steelblue;">Add p-value on graph</span>**<br>
+```{r}
+graph_shan + stat_pvalue_manual(
+  pairwise_test,
+  y.position = 0.3,
+  label = "p.adj = {p.adj}",
+  color = "blue",
+  linetype = 1,
+  tip.length = 0.02
+)
+```
+
+## **<span style="color: steelblue;">IV- Bivariate Analysis </span>**
+________________________________________________________________<br>
+**<span style="color: steelblue;">Study the relationship between two variables  (quantitatives or qualitatives)</span>**<br>
+________________________________________________________________<br>
+
+###  **<span style="color: steelblue;">A- Correlation analysis</span>**
+**<span style="color: steelblue;">Important : <span style="color: red;">Correlation coefficient r </span> is  independent of change of origin and scale (So no data transformation!!)<br> Correlation analysis describes  <span style="color: red;">the nature (strength (0 to 1) and direction Positive/Negative) of the relationship </span> between two quantitative variables (r),whatever the range and the measurement units of them.<br></span>**
+___________________________<br>
+**<span style="color: steelblue;">Methods & conditions : </span>**<br>
+- **Pearson** :  Parametric <br>
+- **Spearman**:  Non-Parametric <br>
+- **Kendall** :  Non-parametric <br>
+___________________________<br>
+**<span style="color: steelblue;">The procedure is :</span>** <br>
+- **Select your variables** of interest<br>
+- **Test the Normality** of data<br>
+- **Choose the right method** according Normality result<br>
+- **Apply Correlation method**<br>
+- **Apply statistical test**<br>
+- **Build the final plot**<br>
+___________________________<br><br>
+
+
+- #### **<span style="color: steelblue;">a1/ Select variables that you want</span>**
+```{r}
+#Select variables for bivariate correlation
+myvariables = select(alldata, SiOH4:PO4, observed,PD)
+#see
+myvariables
+```
+
+- #### **<span style="color: steelblue;">a2/ Normality</span>**
+```{r fig.height=15}
+indices_normality(myvariables, nrow =3, ncol = 3)
+```
+
+18- **<span style="color: red;"Conclusions, which method to apply?</span>**<br>
+
+
+- #### **<span style="color: steelblue;">a3/ Apply the Pearson method</span>**
+```{r}
+#Apply method pearson
+matrixCor = cor(myvariables, method = "pearson")
+#see
+matrixCor
+```
+
+- #### **<span style="color: steelblue;">Save the table with correlation values</span>**
+```{r}
+write.table(matrixCor,file="./correlation_matrix.txt",sep = "\t")
+```
+
+- ####	**<span style="color: steelblue;">a4/ Plot results: corrplot function</span>**
+```{r}
+corrplot(
+  matrixCor,
+  method="circle",
+  type="lower",
+  order='hclust',
+  tl.col = "black",
+  tl.srt = 45,
+  tl.cex=0.9,
+  diag = FALSE
+)
+```
+
+- ####	**<span style="color: steelblue;">a5/ Is the correlation is due to chance? Significance test!</span>**
+______________________________________________________<br>
+The idea: 
+- Test the correlation at the population scale (= increase data , it's call Rho) and compare to r (your samples) <br>
+**<span style="color: steelblue;">H0 is : There is no significant linear correlation between X and Y variables in the population </span>**<br>
+For instance a t-test allows to use sample data to generalize an assumption to an entire population<br>
+______________________________________________________<br>
+
+```{r}
+#Test stats
+ptest =cor.mtest(matrixCor, conf.level = .95)
+```
+
+```{r}
+#ptest is a list... see 
+class(ptest)
+```
+<br>
+```{r}
+#See the list
+ptest
+```
+<br>
+```{r}
+#to see only the p-values you must call ptest$p
+ptest$p 
+```
+
+19- **<span style="color: red;">Save the result in a file</span>**<br>
+20- **<span style="color: red;">Can you display only the value of PD column of ptest\$p (help: first check the class of ptest\$p)? </span>** <br><br>
+
+- #### **<span style="color: steelblue;">a6/ Plot only correlations with significant p-values</span>**
+```{r}
+corrplot(
+  matrixCor,
+  p.mat = ptest$p,
+  sig.level = .05,
+  method = "circle",
+  type = "lower",
+  order = 'hclust',
+  tl.col = "black",
+  tl.srt = 45,
+  tl.cex = 0.7,
+  diag = FALSE
+)
+```
+
+### **<span style="color: steelblue;">B- Linear regression </span>**
+
+______________________________________________________________________<br>
+**<span style="color: steelblue;">Determination of  coefficient R<sup>2</sup> provides percentage variation in Y which is explained by all the X together.<br>
+Its value is (usually) between 0 and 1 and it indicates strength of Linear Regression model.</span>**<br>
+- **<span style="color: steelblue;"> High R<sup>2</sup> value, data points are less scattered so it is a good model</span>**<br>
+- **<span style="color: steelblue;">Low R<sup>2</sup> value is more scattered the data points</span>**<br>
+______________________________________________________________________<br>
+
+- #### **<span style="color: steelblue;">b1/ Regression Shannon ~ Observed </span>**
+
+```{r,results='hide'}
+ggplot(alldata, aes(x = observed, y = shannon)) +
+  geom_point() +
+  stat_smooth(method = "lm", col = "red") +
+  stat_poly_eq(aes(label = paste(after_stat(rr.label),
+                                          after_stat(p.value.label),
+                                          sep = "*\", \"*")))
+```
+
+21- **<span style="color: red;">What is the question we try to answer?</span>**<br>
+22- **<span style="color: red;">Conclusion?</span>**<br>
+
+- #### **<span style="color: steelblue;">b2/ Linear Regression NH4 ~ NO2 </span>**
+
+```{r,results='hide'}
+ggplot(alldata, aes(x = NO2, y = NH4)) +
+  geom_point() +
+  stat_smooth(method = "lm", col = "red") +
+  stat_poly_eq(aes(label = paste(after_stat(rr.label),
+                                          after_stat(p.value.label),
+                                          sep = "*\", \"*")))
+```
+
+23- **<span style="color: red;">What are √R<sup>2</sup> of this exemple? See matrixCor... Do you see the relation beetween R<sup>2</sup> and r?</span>**
+
+**<span style="color: steelblue;"> if you not see, try to run in the console: cor(alldata\$NH4, alldata\$NO2)</span>**
+<br><br>
+
+- #### **<span style="color: steelblue;"> BUT</span>**
+
+**<span style="color: steelblue;"> Remember that you have two population groups (EU vs USA)  in the data</span>**
+```{r,results='hide'}
+ggplot(alldata, aes(x = NO2, y = NH4, col=Geo)) +
+  geom_point() +
+  stat_smooth(method = "lm", col = "red") +
+  stat_poly_eq(aes(label = paste(after_stat(rr.label),
+                                          after_stat(p.value.label),
+                                          sep = "*\", \"*")))
+
+```
+
+- #### **<span style="color: steelblue;"> AND MORE... </span>**
+**<span style="color: steelblue;">facet_grid option to separate the two graph</span>**
+```{r,results='hide'}
+ggplot(alldata, aes(x = NO2, y = NH4, col=Geo)) +
+  geom_point() +
+  stat_smooth(method = "lm", col = "red") +
+  stat_poly_eq(aes(label = paste(after_stat(rr.label),
+                                          after_stat(p.value.label),
+                                          sep = "*\", \"*")))+
+  facet_grid(rows=vars(Geo))
+
+```
+
+- #### **<span style="color: steelblue;"> BONUS </span>**
+**<span style="color: steelblue;">Make linear regression + add correlation r coeficent for numerous variable in ONE step!!<br>
+Allow you to rapidely see wich variables are correlated among a huge list.</span>**
+
+```{r}
+pairs(alldata[, c("NH4","NO3", "NO2","PO4", "observed")],upper.panel = regression_line, lower.panel=panel.cor) 
+```
+
+
+
+
+
+
+ 
+
+
