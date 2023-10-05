@@ -12,7 +12,7 @@ website:
         href: rforbeginer.qmd
       - text: "Graph"
         href: Graph.qmd
-      - text: "Satistis"
+      - text: "Satistics"
         href: Statitics.qmd
     right:
       - icon: github
