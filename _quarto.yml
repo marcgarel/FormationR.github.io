@@ -12,6 +12,8 @@ website:
         href: rforbeginer.qmd
       - text: "Graph"
         href: Graph.qmd
+      - text: "Satistis"
+        href: Statitics.qmd
     right:
       - icon: github
         href: https://github.com/marcgarel/FormationR.github.io
