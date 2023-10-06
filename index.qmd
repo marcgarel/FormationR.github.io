@@ -24,7 +24,7 @@ Welcome on the R training provided by [OMICS](https://www.mio.osupytheas.fr/fr/p
 * **Day 5**
   * Global test - Validation of prior learning
   
-  ##Useful documents
+  ## Useful documents
   
   In this section you can find some cheatsheet for some important packages : 
   
