@@ -13,7 +13,7 @@ Welcome on the R training provided by [OMICS](https://www.mio.osupytheas.fr/fr/p
   
 * **DAY2**
   * End of Practical 1
-  * Graphical representation of biological data & management of parameters type/colour/shape/...
+  * [Graphical](courses/GGplot_mg.pdf) representation of biological data & management of parameters type/colour/shape/...
   
 * **DAY3**
   * Practical 2 Graphical representation of results
