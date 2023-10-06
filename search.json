@@ -67,7 +67,7 @@
     "href": "index.html#schedule",
     "title": "FormationR",
     "section": "Schedule",
-    "text": "Schedule\n\nDAY1 :\n\nRstudio environment and R language course\nPractical 1: R basics: Vectors, Tables, dataframe, manipulations, descriptive statistics, Rmarkdown\n\nDAY2\n\nEnd of Practical 1\nGraphical representation of biological data & management of parameters type/colour/shape/…\n\nDAY3\n\nPractical 2 Graphical representation of results\n\nDAY4\n\nLectures and practical work: Inferential statistics (Anova, Kruskall, Wilcoxon, regression, correlation, r, R2, adjusted p-value, etc.)\n\nDay 5\n\nGlobal test - Validation of prior learning"
+    "text": "Schedule\n\nDAY1 :\n\nRstudio environment and R language course\nPractical 1: R basics: Vectors, Tables, dataframe, manipulations, descriptive statistics, Rmarkdown\n\nDAY2\n\nEnd of Practical 1\nGraphical representation of biological data & management of parameters type/colour/shape/…\n\nDAY3\n\nPractical 2 Graphical representation of results\n\nDAY4\n\nLectures and practical work: Inferential statistics (Anova, Kruskall, Wilcoxon, regression, correlation, r, R2, adjusted p-value, etc.)\n\nDay 5\n\nGlobal test - Validation of prior learning\n\n##Useful documents\nIn this section you can find some cheatsheet for some important packages :\n\ndplyr\nggplo2\nrmarkdown"
   },
   {
     "objectID": "about.html#organisation-committee-and-intervenants",
