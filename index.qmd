@@ -8,7 +8,7 @@ Welcome on the R training provided by [OMICS](https://www.mio.osupytheas.fr/fr/p
 ## Schedule 
 
 * **DAY1** : 
-  * Rstudio environment and R language course 
+  * [Rstudio](courses/Intro_R_Rstudio_2023.pdf) environment and R language course 
   * Practical 1: R basics: Vectors, Tables, dataframe, manipulations, descriptive statistics, Rmarkdown
   
 * **DAY2**
