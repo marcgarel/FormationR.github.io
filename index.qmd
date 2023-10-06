@@ -25,5 +25,13 @@ Welcome on the R training provided by [OMICS](https://www.mio.osupytheas.fr/fr/p
   * Global test - Validation of prior learning
   
   ##Useful documents
+  
+  In this section you can find some cheatsheet for some important packages : 
+  
+  * [dplyr](docs/data-transformation_dplyr-1.pdf)
+  * [ggplo2](docs/data-visualization_ggplot2-2.1.pdf)
+  * [rmarkdown](docs/rmarkdown-2.0.pdf)
+  
+
 
 
