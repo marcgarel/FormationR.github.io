@@ -223,19 +223,34 @@ stat_summary(fun=mean, geom="point", shape=5, col="white", size=3)
 
 #### 2D approach: geom_density2d
 
-Notez Densité à travers des contours lignes
+Note density throughout contour lines
 
 ```{r}
 ggplot(data=iris,aes(x=Sepal.Width,y=Sepal.Length, color=Species))+ 
 geom_density2d()
 ```
 
-##### I data on the contour plot
+##### I plot data on the contour plot
 
 ```{r}
 ggplot(data=iris,aes(x=Sepal.Width,y=Sepal.Length, color=Species)) +
 geom_point()+
 geom_density2d()
+```
+
+##### Color areas/density band : geom_density_2d_filled
+Density across "bands". Note:contour_var = "ndensity": Normalise intensity to 1.
+
+```{r}
+ggplot(data=iris,aes(x=Sepal.Width,y=Sepal.Length)) +
+geom_point(cex=0.8)+
+geom_density_2d_filled(alpha = 0.5,bins=5,contour_var = "ndensity")
+```
+
+```{r}
+ggplot(data=iris,aes(x=Sepal.Width,y=Sepal.Length)) +
+geom_point(aes(col=Species),cex=0.5)+
+geom_density_2d_filled(alpha = 0.7,contour_var = "ndensity", bins=15)
 ```
 
 **Save your plot**
@@ -259,6 +274,57 @@ ggplot(data = iris, aes(Sepal.Length,Petal.Length))+
   geom_point(aes(shape = Species))+
   facet_wrap(~Species, scales = "free")
 ```
+
+:::{.callout-note}
+Library patchwork offers more adventage to custom your different panel. 
+You can find [here](https://patchwork.data-imaginist.com/index.html) more information about patchwork packages
+:::
+
+```{r}
+library(patchwork)
+g1<-ggplot(data=iris, aes(x=Species, y=Sepal.Length))+
+geom_boxplot(aes(fill=Species,col=Species),alpha=0.6)+
+labs(x="Species",y="Sepal Length", title="Iris Boxplot")+
+stat_summary(fun=mean, geom="point", shape=5, col="white", size=3) 
+
+g2<-ggplot(data=iris,aes(x=Sepal.Width,y=Sepal.Length)) +
+geom_point(aes(col=Species),cex=0.5)+
+geom_density_2d_filled(alpha = 0.7,contour_var = "ndensity", bins=15)
+
+g3<-ggplot(data = my_df, aes(Species, moyenne))+# scatter plot
+  geom_col(aes(color= Species, fill=Species))+
+  labs(x="Species", y="Sepal.Length (mm)")+
+  geom_errorbar(aes(ymin = moyenne-sd, ymax = moyenne+sd), width=0.2)
+
+(g1|g2)/g3
+```
+
+```{r}
+library(patchwork)
+g1<-ggplot(data=iris, aes(x=Species, y=Sepal.Length))+
+  geom_boxplot(aes(fill=Species,col=Species),alpha=0.6)+
+  labs(x="Species",y="Sepal Length", title="Iris Boxplot")+
+  stat_summary(fun=mean, geom="point", shape=5, col="white", size=3)+
+  theme_bw()+
+  ggtitle("A")
+
+g2<-ggplot(data=iris,aes(x=Sepal.Width,y=Sepal.Length)) +
+  geom_point(aes(col=Species),cex=0.5)+
+  geom_density_2d_filled(alpha = 0.7,contour_var = "ndensity", bins=15)+
+  theme_bw()+
+  ggtitle("B")
+
+g3<-ggplot(data = my_df, aes(Species, moyenne))+# scatter plot
+  geom_col(aes(color= Species, fill=Species))+
+  labs(x="Species", y="Sepal.Length (mm)")+
+  geom_errorbar(aes(ymin = moyenne-sd, ymax = moyenne+sd), width=0.2)+
+  theme_bw()+
+  ggtitle("C")
+
+(g1|g2)/g3
+```
+
+
 
 ### Interactive graph using plotly package
 
