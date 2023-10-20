@@ -4,8 +4,9 @@ title: "About"
 
 ## Plateform OMICS
 
+OMICS provides analytical expertise in molecular biology and bioinformatics for the taxonomic characterization of prokaryotes in marine ecosystems. Expert analyses in the bioinformatics core are provided in numerical ecology in relation to the characterization of biodiversity through high-volume sequencing. Training courses are also provided to characterize microbial diversity using [R](https://cran.r-project.org/)/[Rstudio](https://posit.co/download/rstudio-desktop/).
 
-## Organisation committee and intervenants
+## Organisation committee
 
 [Laurie Casalot](mailto:laurie.casalot@mio.osupytheas.fr)
 

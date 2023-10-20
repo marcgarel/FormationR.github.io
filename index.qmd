@@ -10,6 +10,7 @@ Welcome on the R training provided by [OMICS](https://www.mio.osupytheas.fr/fr/p
 * **DAY1** : 
   * [Rstudio](courses/Intro_R_Rstudio_2023.pdf) environment and R language course 
   * Practical 1: R basics: Vectors, Tables, dataframe, manipulations, descriptive statistics, Rmarkdown
+  * [Some questions](https://app.wooclap.com/MXJUEG?from=event-page) 
   
 * **DAY2**
   * End of Practical 1
@@ -17,20 +18,28 @@ Welcome on the R training provided by [OMICS](https://www.mio.osupytheas.fr/fr/p
   
 * **DAY3**
   * Practical 2 Graphical representation of results
+  * [Some questions](https://app.wooclap.com/FNAXAI?from=event-page)
   
 * **DAY4**
-  * Lectures and practical work: Inferential statistics (Anova, Kruskall, Wilcoxon, regression, correlation, r, R2, adjusted p-value, etc.)
+  * [Lectures](courses/Statistical_PFS_Tunisie_2023.pdf) and practical work: Inferential statistics (Anova, Kruskall, Wilcoxon, regression, correlation, r, R2, adjusted p-value, etc.)
   
 * **Day 5**
   * Global test - Validation of prior learning
   
-  ## Useful documents
+## Useful documents
   
   In this section you can find some cheatsheet for some important packages : 
   
   * [dplyr](docs/data-transformation_dplyr-1.pdf)
   * [ggplo2](docs/data-visualization_ggplot2-2.1.pdf)
   * [rmarkdown](docs/rmarkdown-2.0.pdf)
+  
+  If these packages are missing, please install them : 
+  
+```{r eval=FALSE}
+install.packages(c("ggplot2","psych","dplyr", "FSA", "ggpubr", "corrplot", "ggpmisc", "broom", "tidyr" ))
+```
+  
   
 
 

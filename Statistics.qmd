@@ -15,7 +15,7 @@ output:
     df_print: paged
     toc: yes
     toc_depth: '4'
-authors: Armougom/Garel
+authors: Marc Garel & Fabrice Armougom
 editor_options: 
   chunk_output_type: inline
 ---
@@ -35,7 +35,6 @@ library(corrplot)
 library(ggpmisc)
 library(graphics)
 library(broom)
-library(dplyr)
 library(tidyr)
 ```
 
@@ -171,7 +170,7 @@ descriptstats_groups
 ```{r}
 #Distribution of NO2 for all data  
 ggplot(data=alldata, aes(x=NO2)) +
-geom_density(adjust=1.5, alpha=.4,show.legend=TRUE, aes(fill="red"))
+geom_density(adjust=1.5, alpha=.4,show.legend=TRUE, fill="red")
 ```
 
 

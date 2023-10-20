@@ -344,9 +344,9 @@ plotly::ggplotly(p4, height = 350, width=800)
 
 1.  Read the data set mapfileFa.txt
 2.  Give me the structure of the data set, and explore the data set. Dimension of the data set ? What kind of variable do you have?
-3.  Give me the distribution Chlorophyl and Nanoeukaryote using ggplot and geom_boxplot() colored by the geography. Using the package patchwork (https://cran.r-project.org/web/packages/patchwork/vignettes/patchwork.html) build figure with these two on a same pages and save it as pdf
+3.  Give me the distribution Chlorophyl and Nanoeukaryote using ggplot and geom_boxplot() colored by the geography. Using the package patchwork build figure with these two plots on a same pages and save it as pdf
 4.  Add a variable into the data frame as the ratio between NT and PT. Build a scatter of the ratio NT/PT as a function sample name and sort by geography using facet_wrap function. Change x and y label as Sample Name and Ratio NR/TP. Give a title at your figure.
-5.  Group dataset by the geopgraphy ,calclulate the mean and the sd of the nbr of Crypto. Build a bar plot with mean and error bar (sd) colored according to the geography and save the plot\
+5.  Group dataset by the geography and calculate the mean and the sd of the number of Crypto. Build a bar plot with mean and error bar (sd) colored according to the geography.
 6.  Save figure as pdf
 7.  Filter South data in a new data frame. Build a scatter plot, with size of shape = 3 and color = red. Add a trend curve.
 8.  Do the the same for northern site.
